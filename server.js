@@ -1,8 +1,12 @@
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./openapi.json");
 
 const app = express();
 
 app.use(express.json());
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(3000, () => {
     console.log("Server running");
@@ -98,3 +102,4 @@ app.delete("/tasks/:id", (req, res) => {
 
     res.sendStatus(204);
 });
+
